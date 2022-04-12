@@ -49,6 +49,7 @@
 /web-app/.DS_Store
 /web-app/.env*
 
+# logs
 /web-app/npm-debug.log*
 /web-app/yarn-debug.log*
 /web-app/yarn-error.log*
