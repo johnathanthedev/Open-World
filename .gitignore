@@ -1,3 +1,5 @@
+.env*
+
 # ===== Rails =====
 
 # See https://help.github.com/articles/ignoring-files for more about ignoring files.
@@ -47,7 +49,6 @@
 
 # misc
 /web-app/.DS_Store
-/web-app/.env*
 
 /web-app/npm-debug.log*
 /web-app/yarn-debug.log*
