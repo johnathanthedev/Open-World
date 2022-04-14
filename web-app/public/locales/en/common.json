@@ -1,0 +1,21 @@
+{
+  "Sign Up": "Sign Up",
+  "Sign In": "Sign In",
+  "Submit": "Submit",
+  "Name": "Name",
+  "Enter your name": "Enter your name",
+  "Email address": "Email address",
+  "Enter email": "Enter email",
+  "We'll never share your information with anyone else.": "We'll never share your information with anyone else.",
+  "Password": "Password",
+  "Min. 8 characters long": "Min. 8 characters long",
+  "Password must be 8 characters long": "Password must be 8 characters long",
+  "Password confirmation": "Password confirmation",
+  "Remember me": "Remember me",
+  "Name is required": "Name is required",
+  "Must be a valid email address": "Must be a valid email address",
+  "Email is required": "Email is required",
+  "Password is required": "Password is required",
+  "Password confirmation is required": "Password confirmation is required",
+  "Passwords must match": "Passwords must match"
+}
