@@ -1,11 +1,12 @@
 import { Button, Form } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
+import { TFunction, withTranslation } from 'react-i18next';
 import useSignUp from '../../../../hooks/useSignUp';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-interface Props {}
-
+interface Props {
+  t: TFunction<string[], undefined>;
+}
 interface IFormValues {
   name: string;
   email: string;
@@ -13,8 +14,7 @@ interface IFormValues {
   passwordConfirmation: string;
 }
 
-const SignUpForm = (props: Props) => {
-  const { t } = useTranslation(['common']);
+const SignUpForm = ({ t }: Props) => {
   const { signUp } = useSignUp();
   const initialValues: IFormValues = {
     name: '',
@@ -39,21 +39,21 @@ const SignUpForm = (props: Props) => {
   const formik = useFormik({
     initialValues,
     onSubmit: () => {
-      signUp();
+      signUp(formik?.values);
     },
     validationSchema: signUpValidationSchema,
   });
 
   return (
-    <Form onSubmit={formik.handleSubmit}>
+    <Form onSubmit={formik?.handleSubmit}>
       <Form.Group className='mb-3'>
         <Form.Label>{t('Name')}</Form.Label>
         <Form.Control
           name='name'
           type='text'
           placeholder={t('Enter your name')}
-          onChange={formik.handleChange}
-          value={formik.values.name}
+          onChange={formik?.handleChange}
+          value={formik?.values?.name}
         />
         {formik?.errors?.name && formik?.touched?.name && (
           <p className='text-danger'>{formik?.errors?.name}</p>
@@ -66,8 +66,8 @@ const SignUpForm = (props: Props) => {
           type='email'
           placeholder={t('Enter email')}
           autoComplete='email'
-          onChange={formik.handleChange}
-          value={formik.values.email}
+          onChange={formik?.handleChange}
+          value={formik?.values.email}
         />
         {formik?.errors?.email && formik?.touched?.email && (
           <p className='text-danger'>{formik?.errors?.email}</p>
@@ -83,8 +83,8 @@ const SignUpForm = (props: Props) => {
           type='password'
           autoComplete='new-password'
           placeholder={t('Min. 8 characters long')}
-          onChange={formik.handleChange}
-          value={formik.values.password}
+          onChange={formik?.handleChange}
+          value={formik?.values?.password}
         />
         {formik?.errors?.password && formik?.touched?.password && (
           <p className='text-danger'>{formik?.errors?.password}</p>
@@ -97,8 +97,8 @@ const SignUpForm = (props: Props) => {
           type='password'
           autoComplete='new-password'
           placeholder={t('Password confirmation')}
-          onChange={formik.handleChange}
-          value={formik.values.passwordConfirmation}
+          onChange={formik?.handleChange}
+          value={formik?.values?.passwordConfirmation}
         />
         {formik?.errors?.passwordConfirmation &&
           formik?.touched?.passwordConfirmation && (
@@ -112,4 +112,4 @@ const SignUpForm = (props: Props) => {
   );
 };
 
-export default SignUpForm;
+export default withTranslation(['common'])(SignUpForm);

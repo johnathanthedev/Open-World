@@ -16,7 +16,8 @@ class Api::V1::SessionsController < ApplicationController
       }
     else
       render json: {
-        message: 'Invalid credentials'
+        message: 'Invalid credentials',
+        status: 401
       }
     end
   end
@@ -24,16 +25,15 @@ class Api::V1::SessionsController < ApplicationController
   def signed_in
     if Current.user
       render json: {
-        logged_in: true,
+        signed_in: true,
         user: Current.user
       }
     else
       render json: {
-        logged_in: false
+        signed_in: false
       }
     end
   end
-
 
   def destroy
     session[:user_id] = nil

@@ -1,18 +1,21 @@
+import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
+import { TFunction, withTranslation } from 'react-i18next';
 import useSignIn from '../../../../hooks/useSignIn';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-interface Props {}
+interface Props {
+  t: TFunction<string[], undefined>;
+}
 
 interface IFormValues {
   email: string;
   password: string;
 }
 
-const SignInForm = (props: Props) => {
-  const { t } = useTranslation(['common']);
+const SignInForm = ({ t }: Props) => {
+  const [signInErrors, setSignInErrors] = useState<string | null>(null);
   const { signIn } = useSignIn();
   const initialValues: IFormValues = {
     email: '',
@@ -31,13 +34,15 @@ const SignInForm = (props: Props) => {
   const formik = useFormik({
     initialValues,
     onSubmit: () => {
-      signIn();
+      signIn(formik?.values).then((data) => {
+        !!data && setSignInErrors(data);
+      });
     },
     validationSchema: signInValidationSchema,
   });
 
   return (
-    <Form onSubmit={formik.handleSubmit}>
+    <Form onSubmit={formik?.handleSubmit}>
       <Form.Group className='mb-3' controlId='formBasicEmail'>
         <Form.Label>{t('Email address')}</Form.Label>
         <Form.Control
@@ -45,8 +50,8 @@ const SignInForm = (props: Props) => {
           type='email'
           placeholder={t('Enter email')}
           autoComplete='email'
-          onChange={formik.handleChange}
-          value={formik.values.email}
+          onChange={formik?.handleChange}
+          value={formik?.values?.email}
         />
         {formik?.errors?.email && formik?.touched?.email && (
           <p className='text-danger'>{formik?.errors?.email}</p>
@@ -63,12 +68,14 @@ const SignInForm = (props: Props) => {
           type='password'
           autoComplete='new-password'
           placeholder={t('Min. 8 characters long')}
-          onChange={formik.handleChange}
-          value={formik.values.password}
+          onChange={formik?.handleChange}
+          value={formik?.values?.password}
         />
         {formik?.errors?.password && formik?.touched?.password && (
           <p className='text-danger'>{formik?.errors?.password}</p>
         )}
+
+        {!!signInErrors && <p className='text-danger'>{signInErrors}</p>}
       </Form.Group>
 
       <Form.Group className='mb-3' controlId='formBasicCheckbox'>
@@ -80,4 +87,4 @@ const SignInForm = (props: Props) => {
   );
 };
 
-export default SignInForm;
+export default withTranslation(['common'])(SignInForm);

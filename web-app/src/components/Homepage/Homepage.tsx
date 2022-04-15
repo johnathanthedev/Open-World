@@ -1,12 +1,13 @@
 import { Button } from 'react-bootstrap';
 import useModal from '../../hooks/useModal';
 import { SIGNIN_FORM, SIGNUP_FORM } from '../../config/constants';
-import { useTranslation } from 'react-i18next';
+import { TFunction, withTranslation } from 'react-i18next';
 
-interface Props {}
+interface Props {
+  t: TFunction<string[], undefined>;
+}
 
-const Homepage = (props: Props) => {
-  const { t } = useTranslation(['common']);
+const Homepage = ({ t }: Props) => {
   const { Modal, handleShowModal } = useModal();
 
   return (
@@ -32,4 +33,4 @@ const Homepage = (props: Props) => {
   );
 };
 
-export default Homepage;
+export default withTranslation(['common'])(Homepage);

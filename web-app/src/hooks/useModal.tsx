@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Container, Modal as BootstrapModal, Button } from 'react-bootstrap';
+import { Container, Modal as BootstrapModal } from 'react-bootstrap';
 import SignUpForm from '../components/shared/Forms/SignUpForm/Index';
 import SignInForm from '../components/shared/Forms/SignInForm/Index';
 import { SIGNIN_FORM, SIGNUP_FORM } from '../config/constants';
 import { useTranslation } from 'react-i18next';
-import CloseIcon from '../components/shared/Forms/icons/CloseIcon';
+import CloseIcon from '../components/shared/icons/CloseIcon';
 
 interface IModalState {
   showModal?: boolean;

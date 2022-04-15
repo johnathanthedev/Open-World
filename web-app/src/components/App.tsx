@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { publicRoutes, privateRoutes } from '../config/routes';
+import PrivateRoute from './auth/PrivateRoute/index';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
             <Route
               key={index + 1}
               path={route.path}
-              element={route.component}
+              element={<PrivateRoute>{route.component}</PrivateRoute>}
             />
           ))}
         </Routes>
