@@ -1,0 +1,12 @@
+#homepage {
+  h1 {
+    margin-top: -4rem;
+  }
+  button:nth-child(1) {
+    margin-right: 1rem;
+  }
+}
+
+form p[class='text-danger'] {
+  margin-left: 0.3rem !important;
+}
