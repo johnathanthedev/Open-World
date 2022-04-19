@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden !important; // TODO: Do this only when video is present
+}
+
 #homepage {
   h1 {
     margin-top: -4rem;
